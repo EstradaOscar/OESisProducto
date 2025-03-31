@@ -1,0 +1,43 @@
+﻿@model ProductoEN
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-center my-4">Eliminar Producto</h2>
+
+<div class="container p-4 border rounded shadow-sm bg-light text-center" style="max-width: 500px; margin: auto;">
+    <h4 class="mb-3">¿Estás seguro de que deseas eliminar este producto?</h4>
+    <hr />
+    <dl class="text-start">
+        <dt class="fw-bold">@Html.DisplayNameFor(model => model.Nombre)</dt>
+        <dd>@Html.DisplayFor(model => model.Nombre)</dd>
+
+        <dt class="fw-bold">@Html.DisplayNameFor(model => model.Precio)</dt>
+        <dd>@Html.DisplayFor(model => model.Precio)</dd>
+
+        <dt class="fw-bold">@Html.DisplayNameFor(model => model.CantidadDisponible)</dt>
+        <dd>@Html.DisplayFor(model => model.CantidadDisponible)</dd>
+
+        <dt class="fw-bold">@Html.DisplayNameFor(model => model.FechaCreacion)</dt>
+        <dd>@Html.DisplayFor(model => model.FechaCreacion)</dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="d-flex justify-content-between mt-3">
+            <button type="submit" class="btn btn-danger px-4 py-2 shadow-sm fw-bold">
+                🗑️ Eliminar
+            </button>
+            @Html.ActionLink("❌ Cancelar", "Index", null, new { @class = "btn btn-secondary px-4 py-2 shadow-sm fw-bold" })
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
+}

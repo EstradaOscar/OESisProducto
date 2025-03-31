@@ -1,0 +1,67 @@
+﻿@model IEnumerable<ProveedorEN>
+
+<h1>Lista de Proveedores</h1>
+<div>
+    <div class="row mb-4">
+        <div class="col">
+            <a asp-controller="Proveedor" asp-action="ReporteProveedores" class="btn btn-dark"> 📊 Generar Reporte</a>
+            <br />
+            <a asp-controller="Proveedor" asp-action="Create" class="btn btn-dark"> ➕ Nuevo</a>
+        </div>
+        <div class="col text-end">
+            @Html.ActionLink("🧮 Reporte Excel", "ReporteProveedoresExcel", null, new { @class = "btn btn-info btn-lg shadow-sm", style = "border-radius: 10px; transition: 0.3s;" })
+        </div>
+    </div>
+    <!-- Formulario para subir Excel -->
+   
+
+    <div class="card-body">
+        <form asp-action="SubirExcelProveedores" asp-controller="Proveedor" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="archivoExcel">Subir Archivo Excel</label>
+                <input type="file" name="archivoExcel" required class="form-control" />
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Subir y Guardar</button>
+        </form>
+    </div>
+
+    <br />
+
+    @if (Model != null && Model.Any())
+    {
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>NRC</th>
+                    <th>Dirección</th>
+                    <th>Teléfono</th>
+                    <th>Email</th>
+                    <th class="text-center">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var proveedor in Model)
+                {
+                    <tr>
+                        <td>@proveedor.Nombre</td>
+                        <td>@proveedor.NRC</td>
+                        <td>@proveedor.Direccion</td>
+                        <td>@proveedor.Telefono</td>
+                        <td>@proveedor.Email</td>
+                        <td class="text-center">
+                            <a class="btn btn-success btn-sm" asp-controller="Proveedor" asp-action="Edit" asp-route-id="@proveedor.Id">✍️ Editar</a>
+                            <a class="btn btn-danger btn-sm ms-2" asp-controller="Proveedor" asp-action="Delete" asp-route-id="@proveedor.Id">🗑️ Eliminar</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="alert alert-warning text-center">
+            No hay proveedores disponibles.
+        </div>
+    }
+</div>  

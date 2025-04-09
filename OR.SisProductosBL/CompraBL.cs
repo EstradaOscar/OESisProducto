@@ -1,4 +1,5 @@
-﻿using OR.SisProductosDAL;
+﻿using OR.SisProductos.EN.Filtros;
+using OR.SisProductosDAL;
 using OR.SisProductosEN;
 using System;
 using System.Collections.Generic;
@@ -34,6 +35,10 @@ namespace OR.SisProductosBL
         public async Task<List<CompraEN>> ObtenerPorEstadoAsync(byte estado)
         {
             return await compraDAL.ObtenerPorEstadoAsync(estado);
+        }
+        public async Task<List<CompraEN>> ObtenerReporteComprasAsync(CompraFiltros filtro)
+        {
+            return await compraDAL.ObtenerReporteComprasAsync(filtro);
         }
     }
 }

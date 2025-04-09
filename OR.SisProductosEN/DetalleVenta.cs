@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace OR.SisProductosEN
 {
-    public class DetalleCompra
+    public class DetalleVenta
     {
         [Key]
         public int Id { get; set; }
 
-        public int IdCompra { get; set; }
+        public int IdVenta { get; set; }
 
         [Required(ErrorMessage = "El producto es obligatorio.")]
         [ForeignKey("Producto")]
@@ -30,10 +30,10 @@ namespace OR.SisProductosEN
         [Required(ErrorMessage = "El subtotal es obligatorio.")]
         [Range(0.01, 9999999.99, ErrorMessage = "El subtotal debe ser mayor a 0.")]
         [Column(TypeName = "decimal(10,2)")]
-        public decimal SubTotal { get; set; } 
+        public decimal SubTotal { get; set; }
 
         // Relación con Compra (Cada detalle pertenece a una compra)  
-        public virtual CompraEN? Compra { get; set; }
+        public virtual Venta? Venta { get; set; }
 
         // Relación con Producto (Cada detalle está asociado a un producto)  
         public virtual ProductoEN? Producto { get; set; }

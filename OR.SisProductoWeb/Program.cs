@@ -15,16 +15,23 @@ builder.Services.AddDbContext<ORSysProductosDbContext>(opitons =>
     var conexionString = builder.Configuration.GetConnectionString("Conn");
     opitons.UseMySql(conexionString, ServerVersion.AutoDetect(conexionString));
 });
-
+//  esto es Registra ClasesDAL y BL para la inyección de dependencias
 builder.Services.AddScoped<ProductoDAL>();
 builder.Services.AddScoped<ProductoBL>();
 builder.Services.AddScoped<ProveedorDAL>();
 builder.Services.AddScoped<ProveedorBL>();
 builder.Services.AddScoped<CompraDAL>();
 builder.Services.AddScoped<CompraBL>();
+builder.Services.AddScoped<ClienteDAL>(); 
+builder.Services.AddScoped<ClienteBL>();
+builder.Services.AddScoped<VentaDAL>();
+builder.Services.AddScoped<VentaBL>();
 
 
-builder.Services.AddControllersWithViews();
+
+
+
+builder.Services.AddControllersWithViews() ;
 ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
 var app = builder.Build();

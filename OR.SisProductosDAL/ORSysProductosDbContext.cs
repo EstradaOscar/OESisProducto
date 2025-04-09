@@ -10,17 +10,27 @@ namespace OR.SisProductosDAL
         {
 
         }
+        public DbSet<ProductoEN> Productos { get; set; }
+        public DbSet<ProveedorEN> Proveedores { get; set; }
+        public DbSet<CompraEN> Compras { get; set; }
+        public DbSet<DetalleCompra> DetalleCompras { get; set; }
+        public DbSet<Cliente> Clientes { get; set; }
+        public DbSet<Venta> Ventas { get; set; }
+        public DbSet<DetalleVenta> DetalleVentas { get; set; }
 
-        public DbSet<ProductoEN> Productos { get; set; } // DbSet para gestionar entidade 
-        public DbSet<ProveedorEN> Proveedores { get; set; } // DbSet para gestionar entidades ProveedorEN
-        public DbSet<CompraEN> Compras { get; set; } // DbSet para gestionar entidades CompraEN
-        public DbSet<DetalleCompra> DetallesCompra { get; set; } // DbSet para gestionar entidades DetalleCompraEN
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<DetalleCompra>()
                 .HasOne(d => d.Compra)
                 .WithMany(c => c.DetalleCompras)
                 .HasForeignKey(d => d.IdCompra);
+
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<DetalleVenta>()
+           .HasOne(d => d.Venta)
+           .WithMany(c => c.DetalleVentas)
+           .HasForeignKey(d => d.IdVenta);
 
             base.OnModelCreating(modelBuilder);
         }
